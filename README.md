@@ -1,7 +1,7 @@
 # spring-security
 
 > Micro projects for spring boot security implementation
-> This project is an expirimental implimentation of docker and JWT in Spring Boot Project, Not sutable for production use.
+> This project is an expirimental implimentation of docker and JWT in Spring Boot, Not sutable for production use.
 
 ## Table of Contents
 - [Installation](#installation)
