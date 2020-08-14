@@ -1,7 +1,7 @@
 
 version: "3"
 networks:
-  esleposnetwork:
+  microbundlenetwork:
 services:
   mysql-db:
     image: mysql:5.7
@@ -13,7 +13,7 @@ services:
        MYSQL_USER: root
        MYSQL_PASSWORD: admin
     networks:
-      - esleposnetwork
+      - microbundlenetwork
        
   auth-app:
     build: ./auth-app
@@ -25,7 +25,7 @@ services:
     container_name: auth-app
     restart: always
     networks:
-      - esleposnetwork
+      - microbundlenetwork
     ports:
       - "83:83" 
       
@@ -38,7 +38,7 @@ services:
     volumes:
       - "./mongo/:/docker-entrypoint-initdb.d/"
     networks:
-      - esleposnetwork
+      - microbundlenetwork
       
   comment-app:
     build: ./comment-app
@@ -50,7 +50,7 @@ services:
     container_name: comment-app
     restart: always
     networks:
-      - esleposnetwork
+      - microbundlenetwork
     ports:
       - "82:82"
       
@@ -63,7 +63,7 @@ services:
         POSTGRES_PASSWORD: admin
         POSTGRES_DB: user
     networks:
-      - esleposnetwork
+      - microbundlenetwork
      
   user-app:
     build: ./user-app
@@ -75,6 +75,6 @@ services:
     container_name: user-app
     restart: always
     networks:
-      - esleposnetwork
+      - microbundlenetwork
     ports:
       - "84:84"
