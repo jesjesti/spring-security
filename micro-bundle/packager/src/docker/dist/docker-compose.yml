@@ -1,0 +1,80 @@
+
+version: "3"
+networks:
+  esleposnetwork:
+services:
+  mysql-db:
+    image: mysql:5.7
+    container_name: mysql-db
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: admin
+       MYSQL_DATABASE: authentication
+       MYSQL_USER: root
+       MYSQL_PASSWORD: admin
+    networks:
+      - esleposnetwork
+       
+  auth-app:
+    build: ./auth-app
+    container_name: auth-app
+    depends_on:
+      - mysql-db
+    links:
+      - mysql-db
+    container_name: auth-app
+    restart: always
+    networks:
+      - esleposnetwork
+    ports:
+      - "83:83" 
+      
+  mongo-db:
+    image: mongo:4.2
+    container_name: mongo-db
+    restart: always
+    environment:
+      - APP_MONGO_DB=comments
+    volumes:
+      - "./mongo/:/docker-entrypoint-initdb.d/"
+    networks:
+      - esleposnetwork
+      
+  comment-app:
+    build: ./comment-app
+    container_name: comment-app
+    depends_on:
+      - mongo-db
+    links:
+      - mongo-db
+    container_name: comment-app
+    restart: always
+    networks:
+      - esleposnetwork
+    ports:
+      - "82:82"
+      
+  postgre-db:
+    image: postgres:9.5
+    container_name: postgre-db
+    restart: always
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: admin
+        POSTGRES_DB: user
+    networks:
+      - esleposnetwork
+     
+  user-app:
+    build: ./user-app
+    container_name: user-app
+    depends_on:
+      - postgre-db
+    links:
+      - postgre-db
+    container_name: user-app
+    restart: always
+    networks:
+      - esleposnetwork
+    ports:
+      - "84:84"
