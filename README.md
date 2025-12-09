@@ -1,6 +1,6 @@
 # spring-security
 
-> Micro projects for spring boot security implementation.
+> Micro moduled projects for spring boot security implementation.
 > This project is an experimental implementation of docker and JWT in Spring Boot, Not suitable for production use.
 
 ## Table of Contents
